@@ -16,21 +16,25 @@
                         <th scope="col">Kalah</th>
                         <th scope="col">Goal Menang</th>
                         <th scope="col">Goal Kalah</th>
-                        <th scope="col">Poin</th>
+                        <th scope="col">Selisih Goal</th>
+                        <th scope="col">Point</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Arema</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>4</td>
-                        <td>0</td>
-                        <td>6</td>
-                    </tr>
+                    @foreach ($klub as $item)
+                        <tr>
+                            <th scope="row">{{ $loop->iteration + 1 }}</th>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->main }}</td>
+                            <td>{{ $item->menang }}</td>
+                            <td>{{ $item->kalah }}</td>
+                            <td>{{ $item->seri }}</td>
+                            <td>{{ $item->goal_menang }}</td>
+                            <td>{{ $item->goal_kalah }}</td>
+                            <td>{{ $item->goal_menang - $item->goal_kalah }}</td>
+                            <td>{{ $item->point }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
