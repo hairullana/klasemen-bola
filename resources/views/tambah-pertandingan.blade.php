@@ -35,25 +35,27 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                @if (old('jenis') == 'Single')
-                                    @error('klub_tandang')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                    @error('klub_kandang')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                    @error('goal_tandang')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                    @error('goal_kandang')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                @endif
+                                <div class="col-sm-12">
+                                    @if (old('jenis') == 'Single')
+                                        @error('klub_tandang')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        @error('klub_kandang')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        @error('goal_tandang')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        @error('goal_kandang')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-sm-12">
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Simpan</button>
                             </div>
                         </div>
                     </form>
@@ -81,7 +83,7 @@
                                 <div class="col-sm-2">
                                     <input type="number" id="goal" class="form-control form-control-sm" value="0" min="0" name="goal_kandang[]">
                                 </div>
-                                <div class="col-sm-2 d-flex justify-content-center fw-bold">
+                                <div class="col-sm-1 d-flex justify-content-center fw-bold">
                                     vs
                                 </div>
                                 <div class="col-sm-2">
@@ -94,26 +96,31 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                @if (old('jenis') == 'Multiple') 
-                                    @error('klub_tandang')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                    @error('klub_kandang')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                    @error('goal_tandang')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                    @error('goal_kandang')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                @endif
+                                <div class="col-sm-1">
+                                    <button type="button" class="btn btn-danger btn-sm delete-match"><i class="ri-close-circle-line text-white"></i></button>
+                                </div>
+                                <div class="col-sm-12">
+                                    @if (old('jenis') == 'Multiple') 
+                                        @error('klub_tandang')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        @error('klub_kandang')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        @error('goal_tandang')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        @error('goal_kandang')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-sm-12">
-                                <button type="button" id="tambah-pertandingan" class="btn btn-primary">Tambah Pertandingan</button>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="button" id="tambah-pertandingan" class="btn btn-primary"><i class="bi bi-plus-circle text-white"></i> Tambah Pertandingan</button>
+                                <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Simpan</button>
                             </div>
                         </div>
                     </form>
@@ -125,10 +132,16 @@
 
 @push('js')
     <script>
-        $(document).ready(function() {
-            $('#tambah-pertandingan').click(function() {
-                $('.pertandingan-multiple').eq(0).clone().appendTo('#pertandingan-multiple');
-            });
+        $(document)
+        .on('click', '#tambah-pertandingan', function() {
+            $('.pertandingan-multiple').eq(0).clone().appendTo('#pertandingan-multiple');
+        })
+        .on('click', '.delete-match', function() {
+            console.log('asu');
+            let me = $(this);
+            let match = $('.pertandingan-multiple');
+            if (match.length == 1) return toastr.error('Tidak bisa menghapus pertandingan karena sisa 1');
+            return me.closest('.pertandingan-multiple').remove();
         });
     </script>
 @endpush
