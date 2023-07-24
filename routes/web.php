@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(KlasemenBolaController::class)->group(function() {
     Route::get('/', 'klasemenBola')->name('klasemen-bola');
     Route::get('/tambah-klub', 'tambahKlub')->name('tambah-klub');
-    Route::post('/tambah-klub-action', 'tambahKlubAction')->name('tambah-klub-action');
+    Route::post('/tambah-klub', 'tambahKlubAction')->name('tambah-klub-action');
     Route::get('/tambah-pertandingan', 'tambahPertandingan')->name('tambah-pertandingan');
+    Route::post('/tambah-pertandingan', 'tambahPertandinganAction')->name('tambah-pertandingan-action');
 });

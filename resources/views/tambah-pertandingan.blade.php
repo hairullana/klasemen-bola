@@ -7,34 +7,48 @@
                 <div class="card-body">
                     <h5 class="card-title">Single Match</h5>
         
-                    <form>
+                    <form method="POST" action="{{ route('tambah-pertandingan-action') }}">
+                        @csrf
+                        <input type="hidden" name="jenis" value="Single">
                         <div class="row mb-3">
                             <div class="row mb-2">
                                 <div class="col-sm-3">
-                                    <select class="form-select form-select-sm" aria-label="Default select example">
-                                        <option selected="">--select--</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select class="form-select form-select-sm" name="klub_kandang">
+                                        @foreach ($klub as $item)
+                                            <option name="klub_kandang" value="{{ $item->nama }}">{{ $item->nama }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="number" id="skor" class="form-control form-control-sm" value="0" min="0">
+                                    <input type="number"  id="goal" class="form-control form-control-sm" value="0" min="0" name="goal_kandang">
                                 </div>
                                 <div class="col-sm-2 d-flex justify-content-center fw-bold">
                                     vs
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="number" id="skor" class="form-control form-control-sm" value="0" min="0">
+                                    <input type="number" id="goal" class="form-control form-control-sm" value="0" min="0" name="goal_tandang">
                                 </div>
                                 <div class="col-sm-3">
-                                    <select class="form-select form-select-sm" aria-label="Default select example">
-                                        <option selected="">--select--</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select class="form-select form-select-sm" name="klub_tandang">
+                                        @foreach ($klub as $item)
+                                            <option value="{{ $item->nama }}">{{ $item->nama }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
+                                @if (old('jenis') == 'Single')
+                                    @error('klub_tandang')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    @error('klub_kandang')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    @error('goal_tandang')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    @error('goal_kandang')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                @endif
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -52,34 +66,48 @@
                 <div class="card-body">
                     <h5 class="card-title">Multiple Match</h5>
         
-                    <form>
+                    <form method="POST" action="{{ route('tambah-pertandingan-action') }}">
+                        @csrf
+                        <input type="hidden" name="jenis" value="Multiple">
                         <div class="row mb-3" id="pertandingan-multiple">
                             <div class="row pertandingan-multiple mb-2">
                                 <div class="col-sm-3">
-                                    <select class="form-select form-select-sm" aria-label="Default select example">
-                                        <option selected="">--select--</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select class="form-select form-select-sm" name="klub_kandang[]">
+                                        @foreach ($klub as $item)
+                                            <option value="{{ $item->nama }}">{{ $item->nama }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="number" id="skor" class="form-control form-control-sm" value="0" min="0">
+                                    <input type="number" id="goal" class="form-control form-control-sm" value="0" min="0" name="goal_kandang[]">
                                 </div>
                                 <div class="col-sm-2 d-flex justify-content-center fw-bold">
                                     vs
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="number" id="skor" class="form-control form-control-sm" value="0" min="0">
+                                    <input type="number" id="goal" class="form-control form-control-sm" value="0" min="0" name="goal_tandang[]">
                                 </div>
                                 <div class="col-sm-3">
-                                    <select class="form-select form-select-sm" aria-label="Default select example">
-                                        <option selected="">--select--</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select class="form-select form-select-sm" name="klub_tandang[]">
+                                        @foreach ($klub as $item)
+                                            <option value="{{ $item->nama }}">{{ $item->nama }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
+                                @if (old('jenis') == 'Multiple') 
+                                    @error('klub_tandang')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    @error('klub_kandang')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    @error('goal_tandang')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    @error('goal_kandang')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                @endif
                             </div>
                         </div>
                         <div class="row mb-3">
