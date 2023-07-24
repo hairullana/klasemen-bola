@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KlasemenBolaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(KlasemenBolaController::class)->group(function() {
+    Route::get('/', 'klasemenBola')->name('klasemen-bola');
+    Route::get('/tambah-klub', 'tambahKlub')->name('tambah-klub');
+    Route::get('/tambah-pertandingan', 'tambahPertandingan')->name('tambah-pertandingan');
 });
