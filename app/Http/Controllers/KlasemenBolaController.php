@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TambahKlubRequest;
 use App\Models\Klub;
+use Exception;
 use Illuminate\Http\Request;
 
 class KlasemenBolaController extends Controller
@@ -37,6 +39,16 @@ class KlasemenBolaController extends Controller
         return view('tambah-klub', [
             'menu' => 'Tambah Klub'
         ]);
+    }
+
+    public function tambahKlubAction(TambahKlubRequest $request)
+    {
+        try {
+            $this->klub->create($request->toArray());
+            return redirect()->back()->with('success', 'Berhasil menambah klub baru');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function tambahPertandingan()
